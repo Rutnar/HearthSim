@@ -1,10 +1,11 @@
 package com.hearthsim.test.util;
 
-import com.hearthsim.card.Deck;
 import com.hearthsim.card.ImplementedCardList;
 import com.hearthsim.card.ImplementedCardList.ImplementedCard;
+import com.hearthsim.deck.Deck;
 import com.hearthsim.util.DeckFactory;
 import com.hearthsim.util.DeckFactory.DeckFactoryBuilder;
+
 import org.junit.Before;
 import org.junit.Test;
 

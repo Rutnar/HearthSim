@@ -3,13 +3,14 @@ package com.hearthsim.util;
 import com.hearthsim.Game;
 import com.hearthsim.card.Card;
 import com.hearthsim.card.CharacterIndex;
-import com.hearthsim.card.Deck;
 import com.hearthsim.card.minion.Hero;
 import com.hearthsim.card.minion.Minion;
+import com.hearthsim.deck.Deck;
 import com.hearthsim.exception.HSException;
 import com.hearthsim.model.PlayerModel;
 import com.hearthsim.model.PlayerSide;
 import com.hearthsim.util.tree.HearthTreeNode;
+
 import org.json.JSONObject;
 
 

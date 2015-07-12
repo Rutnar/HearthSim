@@ -1,9 +1,9 @@
 package com.hearthsim.util;
 
 import com.hearthsim.card.Card;
-import com.hearthsim.card.Deck;
 import com.hearthsim.card.ImplementedCardList;
 import com.hearthsim.card.ImplementedCardList.ImplementedCard;
+import com.hearthsim.deck.Deck;
 
 import java.util.ArrayList;
 import java.util.HashMap;

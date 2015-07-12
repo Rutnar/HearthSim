@@ -2,13 +2,13 @@ package com.hearthsim.test.minion;
 
 import com.hearthsim.card.Card;
 import com.hearthsim.card.CharacterIndex;
-import com.hearthsim.card.Deck;
 import com.hearthsim.card.basic.minion.BloodfenRaptor;
 import com.hearthsim.card.basic.minion.SilverHandRecruit;
 import com.hearthsim.card.basic.spell.Assassinate;
 import com.hearthsim.card.classic.minion.common.AcolyteOfPain;
 import com.hearthsim.card.minion.Minion;
 import com.hearthsim.card.minion.heroes.TestHero;
+import com.hearthsim.deck.Deck;
 import com.hearthsim.exception.HSException;
 import com.hearthsim.model.BoardModel;
 import com.hearthsim.model.PlayerModel;
@@ -17,6 +17,7 @@ import com.hearthsim.player.playercontroller.BruteForceSearchAI;
 import com.hearthsim.util.HearthActionBoardPair;
 import com.hearthsim.util.tree.CardDrawNode;
 import com.hearthsim.util.tree.HearthTreeNode;
+
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,13 +1,17 @@
 package com.hearthsim.gui;
 
 import com.hearthsim.card.Card;
-import com.hearthsim.card.Deck;
 import com.hearthsim.card.ImplementedCardList;
 import com.hearthsim.card.ImplementedCardList.ImplementedCard;
+import com.hearthsim.card.minion.Hero;
+import com.hearthsim.deck.Deck;
+import com.hearthsim.deck.DeckValidator;
 import com.hearthsim.event.HSSimulationEventListener;
+import com.hearthsim.exception.HSException;
 import com.hearthsim.exception.HSInvalidCardException;
 import com.hearthsim.exception.HSInvalidHeroException;
 import com.hearthsim.io.DeckListFile;
+import com.hearthsim.util.HeroFactory;
 import com.ptplot.Plot;
 
 import javax.swing.*;
@@ -16,7 +20,10 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -42,6 +49,9 @@ public class HearthSim implements HSSimulationEventListener {
     private JLabel cardCount_0;
     private JLabel cardCount_1;
 
+    private JLabel deckValidation_0;
+    private JLabel deckValidation_1;
+    
     private JFileChooser fileChooser_;
 
     private JLabel lblHero_0;
@@ -230,6 +240,10 @@ public class HearthSim implements HSSimulationEventListener {
                         hsModel_.getSimulation().setDeck_p0(deckList.getDeck());
                         hsModel_.getSimulation().setHero_p0(deckList.getHero());
                         lblHero_0.setText(deckList.getHero().getHeroClass());
+                        
+                        // Update the label showing if the deck is valid or has errors
+                        updateValidationText(hsModel_.getSimulation().getDeck_p0(), hsModel_.getSimulation().getHero_p0(), deckValidation_0);
+
                     } catch (HSInvalidCardException e1) {
                         JOptionPane.showMessageDialog(frame, e1.getMessage(),
                                 "Error: Card not valid.", JOptionPane.ERROR_MESSAGE);
@@ -821,6 +835,10 @@ public class HearthSim implements HSSimulationEventListener {
                         hsModel_.getSimulation().setDeck_p1(deckList.getDeck());
                         hsModel_.getSimulation().setHero_p1(deckList.getHero());
                         lblHero_1.setText(deckList.getHero().getHeroClass());
+
+                        // Update the label showing if the deck is valid or has errors
+                        updateValidationText(hsModel_.getSimulation().getDeck_p1(), hsModel_.getSimulation().getHero_p1(), deckValidation_1);
+
                     } catch (HSInvalidCardException e1) {
                         JOptionPane.showMessageDialog(frame, e1.getMessage(),
                                 "Error: Card not valid.", JOptionPane.ERROR_MESSAGE);
@@ -903,13 +921,22 @@ public class HearthSim implements HSSimulationEventListener {
         Player0Panel.add(cardCountPanel_0);
         cardCountPanel_0.setLayout(null);
 
+        // Card Count - Player 0
         cardCount_0 = new JLabel("0 / 30");
-        cardCount_0.setHorizontalAlignment(SwingConstants.CENTER);
+        cardCount_0.setHorizontalAlignment(SwingConstants.LEFT);
         cardCount_0.setBounds(0, 0, 195, 20);
         cardCount_0.setFont(new Font("Helvetica Neue", Font.PLAIN, 12));
         cardCount_0.setForeground(HSColors.TEXT_COLOR);
         cardCountPanel_0.add(cardCount_0);
 
+        // Deck Validation - Player 0
+        deckValidation_0 = new JLabel("");
+        deckValidation_0.setBounds(115, 0, 195, 20);
+        deckValidation_0.setFont(new Font("Helvetica Neue", Font.PLAIN, 12));
+        deckValidation_0.setForeground(HSColors.TEXT_COLOR);
+        cardCountPanel_0.add(deckValidation_0);
+
+        // Panel for Card Count and Deck Validation - Player 1
         JPanel cardCountPanel_1 = new JPanel();
         cardCountPanel_1.setBackground(HSColors.BACKGROUND_COLOR);
         cardCountPanel_1.setForeground(HSColors.TEXT_COLOR);
@@ -924,12 +951,21 @@ public class HearthSim implements HSSimulationEventListener {
         Player1Panel.add(cardCountPanel_1);
         cardCountPanel_1.setLayout(null);
 
+        // Card Count - Player 1
         cardCount_1 = new JLabel("0 / 30");
-        cardCount_1.setHorizontalAlignment(SwingConstants.CENTER);
+        cardCount_1.setHorizontalAlignment(SwingConstants.LEFT);
         cardCount_1.setBounds(0, 0, 195, 20);
         cardCount_1.setFont(new Font("Helvetica Neue", Font.PLAIN, 12));
         cardCount_1.setForeground(HSColors.TEXT_COLOR);
         cardCountPanel_1.add(cardCount_1);
+        
+        // Deck Validation
+        deckValidation_1 = new JLabel("");
+        deckValidation_1.setBounds(115, 0, 195, 20);
+        deckValidation_1.setFont(new Font("Helvetica Neue", Font.PLAIN, 12));
+        deckValidation_1.setForeground(HSColors.TEXT_COLOR);
+        cardCountPanel_1.add(deckValidation_1);
+
 
         deckList_0.getModel().addListDataListener(new ListDataListener() {
 
@@ -947,8 +983,15 @@ public class HearthSim implements HSSimulationEventListener {
 
             @Override
             public void contentsChanged(ListDataEvent e) {
-                // TODO Auto-generated method stub
+                // Update Card Count
                 cardCount_0.setText(deckList_0.getModel().getSize() + " / 30");
+                
+                // Update the internal model
+                Deck player0_deck = deckList_0.getDeck();
+                hsModel_.getSimulation().setDeck_p0(player0_deck);
+
+                // Update the label showing if the deck is valid or has errors
+                updateValidationText(player0_deck, hsModel_.getSimulation().getHero_p0(), deckValidation_0);
             }
 
         });
@@ -969,11 +1012,19 @@ public class HearthSim implements HSSimulationEventListener {
 
             @Override
             public void contentsChanged(ListDataEvent e) {
-                // TODO Auto-generated method stub
+                // Update Card Count
                 cardCount_1.setText(deckList_1.getModel().getSize() + " / 30");
+                
+                // Update the internal model
+                Deck player1_deck = deckList_1.getDeck();
+                hsModel_.getSimulation().setDeck_p1(player1_deck);
+                
+                // Update the label showing if the deck is valid or has errors
+                updateValidationText(player1_deck, hsModel_.getSimulation().getHero_p1(), deckValidation_1);
             }
 
         });
+        
         // --------------------------------------------------------------------
         // Deck creation
         // --------------------------------------------------------------------
@@ -1014,7 +1065,7 @@ public class HearthSim implements HSSimulationEventListener {
             }
         });
 
-        deckCreatePanel_0 = new HSDeckCreatePanel(0, hsModel_, lblHero_0);
+        deckCreatePanel_0 = new HSDeckCreatePanel(0, hsModel_, lblHero_0, deckValidation_0);
         deckCreatePanel_0.setForeground(Color.WHITE);
         deckCreatePanel_0.setBackground(HSColors.LIGHTER_BACKGROUND_COLOR);
         springLayout.putConstraint(SpringLayout.WEST, deckCreatePanel_0, 0,
@@ -1030,7 +1081,7 @@ public class HearthSim implements HSSimulationEventListener {
         deckCreatePanel_0.setCardListPane(deckList_0);
         frame.getContentPane().add(deckCreatePanel_0);
 
-        deckCreatePanel_1 = new HSDeckCreatePanel(1, hsModel_, lblHero_1);
+        deckCreatePanel_1 = new HSDeckCreatePanel(1, hsModel_, lblHero_1, deckValidation_1);
         deckCreatePanel_1.setForeground(Color.WHITE);
         deckCreatePanel_1.setBackground(HSColors.LIGHTER_BACKGROUND_COLOR);
         springLayout.putConstraint(SpringLayout.WEST, deckCreatePanel_1, 0,
@@ -1123,6 +1174,20 @@ public class HearthSim implements HSSimulationEventListener {
             currentShownPlot_.addPoint(1, indx, data1[indx], true);
         }
         currentShownPlot_.repaint();
+    }
+    
+    public void updateValidationText(Deck deck, Hero hero, JLabel label) {
+        
+        // Update the label showing if the deck is valid or has errors
+        DeckValidator deckValidator = new DeckValidator(deck, hero);
+        label.setText(deckValidator.getConstructedDeckStatusText());
+        
+        if (deckValidator.isValidConstructedDeck()) {
+            label.setForeground(HSColors.TEXT_COLOR);
+        }
+        else {
+            label.setForeground(HSColors.ERROR_BUTTON_COLOR);               
+        }                   
     }
 
     @Override

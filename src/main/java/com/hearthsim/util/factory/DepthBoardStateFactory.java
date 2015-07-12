@@ -1,6 +1,6 @@
 package com.hearthsim.util.factory;
 
-import com.hearthsim.card.Deck;
+import com.hearthsim.deck.Deck;
 import com.hearthsim.exception.HSException;
 import com.hearthsim.model.BoardModel;
 import com.hearthsim.player.playercontroller.BoardScorer;

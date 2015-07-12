@@ -1,7 +1,7 @@
 package com.hearthsim;
 
-import com.hearthsim.card.Deck;
 import com.hearthsim.card.minion.Hero;
+import com.hearthsim.deck.Deck;
 import com.hearthsim.exception.HSException;
 import com.hearthsim.player.playercontroller.ArtificialPlayer;
 import com.hearthsim.results.GameResult;

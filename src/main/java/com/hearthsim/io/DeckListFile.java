@@ -1,8 +1,8 @@
 package com.hearthsim.io;
 
 import com.hearthsim.card.Card;
-import com.hearthsim.card.Deck;
 import com.hearthsim.card.minion.Hero;
+import com.hearthsim.deck.Deck;
 import com.hearthsim.exception.HSInvalidCardException;
 import com.hearthsim.exception.HSInvalidHeroException;
 import com.hearthsim.util.CardFactory;

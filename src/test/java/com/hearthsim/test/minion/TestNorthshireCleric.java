@@ -2,18 +2,19 @@ package com.hearthsim.test.minion;
 
 import com.hearthsim.card.Card;
 import com.hearthsim.card.CharacterIndex;
-import com.hearthsim.card.Deck;
 import com.hearthsim.card.basic.minion.NorthshireCleric;
 import com.hearthsim.card.basic.spell.AncestralHealing;
 import com.hearthsim.card.basic.spell.TheCoin;
 import com.hearthsim.card.minion.Minion;
 import com.hearthsim.card.minion.MinionMock;
+import com.hearthsim.deck.Deck;
 import com.hearthsim.exception.HSException;
 import com.hearthsim.model.BoardModel;
 import com.hearthsim.model.PlayerModel;
 import com.hearthsim.model.PlayerSide;
 import com.hearthsim.util.tree.CardDrawNode;
 import com.hearthsim.util.tree.HearthTreeNode;
+
 import org.junit.Before;
 import org.junit.Test;
 

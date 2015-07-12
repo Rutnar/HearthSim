@@ -1,6 +1,6 @@
 package com.hearthsim.util.tree;
 
-import com.hearthsim.card.Deck;
+import com.hearthsim.deck.Deck;
 
 /**
  * A tree node that stops AI from picking the "best" outcome from its branches.

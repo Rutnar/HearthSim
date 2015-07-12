@@ -1,5 +1,6 @@
-package com.hearthsim.card;
+package com.hearthsim.deck;
 
+import com.hearthsim.card.Card;
 import com.hearthsim.util.DeepCopyable;
 
 import java.util.ArrayList;

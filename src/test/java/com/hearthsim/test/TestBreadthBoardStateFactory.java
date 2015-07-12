@@ -2,7 +2,6 @@ package com.hearthsim.test;
 
 import com.hearthsim.card.Card;
 import com.hearthsim.card.CharacterIndex;
-import com.hearthsim.card.Deck;
 import com.hearthsim.card.basic.minion.BloodfenRaptor;
 import com.hearthsim.card.basic.minion.RiverCrocolisk;
 import com.hearthsim.card.basic.minion.ShatteredSunCleric;
@@ -16,6 +15,7 @@ import com.hearthsim.card.classic.spell.common.EarthShock;
 import com.hearthsim.card.classic.spell.common.Silence;
 import com.hearthsim.card.goblinsvsgnomes.spell.common.Flamecannon;
 import com.hearthsim.card.minion.Minion;
+import com.hearthsim.deck.Deck;
 import com.hearthsim.exception.HSException;
 import com.hearthsim.model.BoardModel;
 import com.hearthsim.model.PlayerModel;
@@ -27,6 +27,7 @@ import com.hearthsim.util.factory.BreadthBoardStateFactory;
 import com.hearthsim.util.factory.DepthBoardStateFactory;
 import com.hearthsim.util.tree.HearthTreeNode;
 import com.hearthsim.util.tree.StopNode;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;

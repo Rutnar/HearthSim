@@ -1,7 +1,7 @@
 package com.hearthsim.event.attack;
 
-import com.hearthsim.card.Deck;
 import com.hearthsim.card.minion.Minion;
+import com.hearthsim.deck.Deck;
 import com.hearthsim.util.tree.HearthTreeNode;
 
 /**

@@ -1,10 +1,11 @@
 package com.hearthsim.gui;
 
 import com.hearthsim.card.Card;
-import com.hearthsim.card.Deck;
 import com.hearthsim.card.ImplementedCardList.ImplementedCard;
+import com.hearthsim.deck.Deck;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -33,13 +34,49 @@ public class HSCardList extends JList<ImplementedCard> {
             public void mousePressed(MouseEvent evt) {
                 JList<?> list = (JList<?>)evt.getSource();
                 int index = list.locationToIndex(evt.getPoint());
-                String name = HSCardList.this.getModel().getElementAt(index).name_;
-                log.debug("clicked item " + index + ": " + name);
-                if (editing_ && list.getCellBounds(index, 100000).contains(evt.getPoint())) {
-                    ((SortedListModel<ImplementedCard>) HSCardList.this.getModel()).remove(index);
-                }
+//                if (index >= 0) {
+                    String name = HSCardList.this.getModel().getElementAt(index).name_;
+                    log.debug("clicked item " + index + ": " + name);
+                    if (editing_ && list.getCellBounds(index, 100000).contains(evt.getPoint())) {
+                        ((SortedListModel<ImplementedCard>) HSCardList.this.getModel()).remove(index);
+                    }
+//                }
             }
+            
+//            public void mouseEntered(MouseEvent evt) {
+//                JList<?> list = (JList<?>)evt.getSource();
+//                int index = list.locationToIndex(evt.getPoint());
+//                if (index >= 0) {
+//                    String name = HSCardList.this.getModel().getElementAt(index).name_;
+//                    
+//                    Color cardColor;
+//                    switch (HSCardList.this.getModel().getElementAt(index).rarity_) {
+//                    case "free":
+//                        cardColor = HSColors.CARD_FREE_COLOR;
+//                        break;
+//                    case "common":
+//                        cardColor = HSColors.CARD_COMMON_COLOR;
+//                        break;
+//                    case "rare":
+//                        cardColor = HSColors.CARD_RARE_COLOR;
+//                        break;
+//                    case "epic":
+//                        cardColor = HSColors.CARD_EPIC_COLOR;
+//                        break;
+//                    case "legendary":
+//                        cardColor = HSColors.CARD_LEGENDARY_COLOR;
+//                        break;
+//                    default:
+//                        cardColor = HSColors.CARD_FREE_COLOR;
+//                        break;
+//                    }
+//
+//                    list.setSelectionBackground(cardColor);
+//                    log.debug("mouseover item " + index + ": " + name);
+//                }
+//            }
         });
+        
         this.setCellRenderer(new CardCellRenderer());
     }
 

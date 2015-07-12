@@ -1,6 +1,6 @@
 package com.hearthsim.util.factory;
 
-import com.hearthsim.card.Deck;
+import com.hearthsim.deck.Deck;
 
 /**
  * A BoardStateFactory in which the minion placement is simplified in order to reduce simulation time

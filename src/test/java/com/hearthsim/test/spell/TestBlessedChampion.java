@@ -2,17 +2,18 @@ package com.hearthsim.test.spell;
 
 import com.hearthsim.card.Card;
 import com.hearthsim.card.CharacterIndex;
-import com.hearthsim.card.Deck;
 import com.hearthsim.card.basic.minion.BoulderfistOgre;
 import com.hearthsim.card.basic.minion.DreadInfernal;
 import com.hearthsim.card.basic.minion.RaidLeader;
 import com.hearthsim.card.classic.spell.rare.BlessedChampion;
 import com.hearthsim.card.minion.Minion;
+import com.hearthsim.deck.Deck;
 import com.hearthsim.exception.HSException;
 import com.hearthsim.model.BoardModel;
 import com.hearthsim.model.PlayerModel;
 import com.hearthsim.model.PlayerSide;
 import com.hearthsim.util.tree.HearthTreeNode;
+
 import org.junit.Before;
 import org.junit.Test;
 

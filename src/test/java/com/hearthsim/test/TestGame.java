@@ -2,17 +2,18 @@ package com.hearthsim.test;
 
 import com.hearthsim.Game;
 import com.hearthsim.card.Card;
-import com.hearthsim.card.Deck;
 import com.hearthsim.card.minion.Hero;
 import com.hearthsim.card.minion.Minion;
 import com.hearthsim.card.minion.MinionMock;
 import com.hearthsim.card.minion.heroes.Mage;
 import com.hearthsim.card.minion.heroes.Paladin;
 import com.hearthsim.card.minion.heroes.TestHero;
+import com.hearthsim.deck.Deck;
 import com.hearthsim.exception.HSException;
 import com.hearthsim.model.PlayerModel;
 import com.hearthsim.player.playercontroller.BruteForceSearchAI;
 import com.hearthsim.results.GameResult;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

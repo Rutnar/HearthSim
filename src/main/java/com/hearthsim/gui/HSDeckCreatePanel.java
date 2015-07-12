@@ -1,12 +1,25 @@
 package com.hearthsim.gui;
 
-import com.hearthsim.exception.HSException;
-import com.hearthsim.util.HeroFactory;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.ScrollPaneLayout;
+import javax.swing.SpringLayout;
+
+import com.hearthsim.deck.DeckValidator;
+import com.hearthsim.exception.HSException;
+import com.hearthsim.util.HeroFactory;
 
 public class HSDeckCreatePanel extends JPanel {
     private static final long serialVersionUID = 1L;
@@ -31,12 +44,13 @@ public class HSDeckCreatePanel extends JPanel {
 
     HSCardSelectionList cardList_;
 
-    public HSDeckCreatePanel(int playerIndex, final HSMainFrameModel hsModel, final JLabel label) {
+    public HSDeckCreatePanel(int playerIndex, final HSMainFrameModel hsModel, final JLabel heroNameLabel, JLabel validationLabel) {
         super();
         playerIndex_ = playerIndex;
         layout_ = new SpringLayout();
         super.setLayout(layout_);
 
+        
         titlePanel_ = new JPanel();
         SpringLayout sl_titlePanel = new SpringLayout();
         titlePanel_.setLayout(sl_titlePanel);
@@ -59,7 +73,7 @@ public class HSDeckCreatePanel extends JPanel {
             heroChoice_.setSelectedItem(hsModel.getSimulation().getHero_p0().getName());
         else if (playerIndex == 1)
             heroChoice_.setSelectedItem(hsModel.getSimulation().getHero_p1().getName());
-        heroChoice_.setFont(new Font("Helvetica Neue", Font.PLAIN, 22));
+        heroChoice_.setFont(new Font("Helvetica Neue", Font.PLAIN, 14));
 
 
         heroChoice_.addActionListener(new ActionListener() {
@@ -69,10 +83,30 @@ public class HSDeckCreatePanel extends JPanel {
                 try {
                     if (playerIndex_ == 0) {
                         hsModel.getSimulation().setHero_p0(HeroFactory.getHero((String)heroChoice_.getSelectedItem()));
+                        
+                        // Update the label showing if the deck is valid or has errors
+                        DeckValidator deckValidator = new DeckValidator(hsModel.getSimulation().getDeck_p0(), hsModel.getSimulation().getHero_p0());
+                        validationLabel.setText(deckValidator.getConstructedDeckStatusText());
+                        if (deckValidator.isValidConstructedDeck()) {
+                            validationLabel.setForeground(HSColors.TEXT_COLOR);
+                        }
+                        else {
+                            validationLabel.setForeground(HSColors.ERROR_BUTTON_COLOR);               
+                        }                   
                     } else if (playerIndex_ == 1) {
                         hsModel.getSimulation().setHero_p1(HeroFactory.getHero((String)heroChoice_.getSelectedItem()));
+                        
+                        // Update the label showing if the deck is valid or has errors
+                        DeckValidator deckValidator = new DeckValidator(hsModel.getSimulation().getDeck_p1(), hsModel.getSimulation().getHero_p1());
+                        validationLabel.setText(deckValidator.getConstructedDeckStatusText());
+                        if (deckValidator.isValidConstructedDeck()) {
+                            validationLabel.setForeground(HSColors.TEXT_COLOR);
+                        }
+                        else {
+                            validationLabel.setForeground(HSColors.ERROR_BUTTON_COLOR);               
+                        }                   
                     }
-                    label.setText((String)heroChoice_.getSelectedItem());
+                    heroNameLabel.setText((String)heroChoice_.getSelectedItem());
                 } catch (HSException exception) {
                     log.error(exception.toString());
                 }
@@ -82,7 +116,7 @@ public class HSDeckCreatePanel extends JPanel {
 
 
         JLabel heroChoiceLegend = new JLabel("Hero:");
-        heroChoiceLegend.setFont(new Font("Helvetica Neue", Font.PLAIN, 14));
+        heroChoiceLegend.setFont(new Font("Helvetica Neue", Font.BOLD, 14));
         heroChoiceLegend.setForeground(HSColors.TEXT_COLOR);
         heroChoicePanel_.add(heroChoiceLegend);
         heroChoicePanel_.add(heroChoice_);

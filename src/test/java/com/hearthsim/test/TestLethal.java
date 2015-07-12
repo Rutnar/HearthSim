@@ -1,7 +1,6 @@
 package com.hearthsim.test;
 
 import com.hearthsim.card.Card;
-import com.hearthsim.card.Deck;
 import com.hearthsim.card.basic.minion.*;
 import com.hearthsim.card.basic.spell.*;
 import com.hearthsim.card.classic.minion.common.DarkIronDwarf;
@@ -18,11 +17,13 @@ import com.hearthsim.card.classic.spell.common.Silence;
 import com.hearthsim.card.classic.spell.common.UnleashTheHounds;
 import com.hearthsim.card.minion.Hero;
 import com.hearthsim.card.minion.Minion;
+import com.hearthsim.deck.Deck;
 import com.hearthsim.exception.HSException;
 import com.hearthsim.model.BoardModel;
 import com.hearthsim.model.PlayerSide;
 import com.hearthsim.util.factory.BreadthBoardStateFactory;
 import com.hearthsim.util.tree.HearthTreeNode;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

@@ -3,11 +3,12 @@ package com.hearthsim.model;
 import com.hearthsim.card.Card;
 import com.hearthsim.card.CardInHandIndex;
 import com.hearthsim.card.CharacterIndex;
-import com.hearthsim.card.Deck;
 import com.hearthsim.card.minion.Hero;
 import com.hearthsim.card.minion.Minion;
+import com.hearthsim.deck.Deck;
 import com.hearthsim.util.DeepCopyable;
 import com.hearthsim.util.IdentityLinkedList;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

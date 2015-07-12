@@ -1,9 +1,9 @@
 package com.hearthsim.gui;
 
 import com.hearthsim.HearthSimGUI;
-import com.hearthsim.card.Deck;
 import com.hearthsim.card.minion.Hero;
 import com.hearthsim.card.minion.heroes.TestHero;
+import com.hearthsim.deck.Deck;
 import com.hearthsim.event.HSSimulationEventListener;
 import com.hearthsim.player.playercontroller.ArtificialPlayer;
 

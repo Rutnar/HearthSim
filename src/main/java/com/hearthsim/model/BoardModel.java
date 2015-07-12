@@ -3,17 +3,18 @@ package com.hearthsim.model;
 import com.hearthsim.card.Card;
 import com.hearthsim.card.CardInHandIndex;
 import com.hearthsim.card.CharacterIndex;
-import com.hearthsim.card.Deck;
 import com.hearthsim.card.minion.AuraTargetType;
 import com.hearthsim.card.minion.Hero;
 import com.hearthsim.card.minion.Minion;
 import com.hearthsim.card.minion.MinionWithAura;
 import com.hearthsim.card.minion.heroes.TestHero;
+import com.hearthsim.deck.Deck;
 import com.hearthsim.event.effect.ActiveEffectHand;
 import com.hearthsim.event.effect.SimpleEffectHand;
 import com.hearthsim.event.filter.FilterHand;
 import com.hearthsim.util.DeepCopyable;
 import com.hearthsim.util.IdentityLinkedList;
+
 import org.json.JSONObject;
 import org.slf4j.MDC;
 

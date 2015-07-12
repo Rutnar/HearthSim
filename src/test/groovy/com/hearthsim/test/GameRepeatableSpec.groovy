@@ -2,7 +2,6 @@ package com.hearthsim.test
 
 import com.hearthsim.Game
 import com.hearthsim.card.Card
-import com.hearthsim.card.Deck
 import com.hearthsim.card.ImplementedCardList
 import com.hearthsim.card.basic.minion.NoviceEngineer
 import com.hearthsim.card.basic.spell.AnimalCompanion
@@ -10,16 +9,18 @@ import com.hearthsim.card.basic.spell.ArcaneIntellect
 import com.hearthsim.card.basic.spell.Soulfire
 import com.hearthsim.card.minion.MinionMock
 import com.hearthsim.card.minion.heroes.TestHero
+import com.hearthsim.deck.Deck;
 import com.hearthsim.exception.HSException
 import com.hearthsim.model.PlayerModel
 import com.hearthsim.player.playercontroller.BruteForceSearchAI
 import com.hearthsim.test.groovy.card.CardSpec
 import com.hearthsim.util.HearthActionBoardPair
 import com.hearthsim.util.tree.HearthTreeNode
+
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import spock.lang.Ignore
 
+import spock.lang.Ignore
 import static org.junit.Assert.assertNotNull;
 
 class GameRepeatableSpec extends CardSpec {
